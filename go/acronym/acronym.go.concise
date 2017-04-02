@@ -1,0 +1,27 @@
+// Package that includes functionality for creating acronyms from sentence.
+package acronym
+
+import (
+	"strings"
+	"unicode"
+)
+
+const testVersion = 2
+
+// Abbreviate() turns a string into a string acronym.
+func Abbreviate(sentence string) string {
+	var acronym string // The
+	var prevCharWasUpper bool
+	titleSentence := strings.Title(sentence)
+	for _, char := range titleSentence {
+		if unicode.IsUpper(char) {
+			if !prevCharWasUpper {
+				prevCharWasUpper = true
+				acronym = acronym + string(char)
+			}
+		} else {
+			prevCharWasUpper = false
+		}
+	}
+	return acronym
+}
